@@ -62,11 +62,11 @@ export const ProductCardUI = ({ product }: ProductCardUIProps) => {
                 </div>
               </div>
 
-              <h3 className="text-black font-medium text-sm mb-1 line-clamp-2">
+              <h3 className="text-foreground font-semibold text-base mb-2 line-clamp-2">
                 {logic.product.title}
               </h3>
               {logic.product.description && (
-                <p className="text-gray-600 text-xs mb-3 line-clamp-2">
+                <p className="text-muted-foreground text-sm mb-3 line-clamp-2">
                   {logic.product.description.replace(/<[^>]*>/g, '')}
                 </p>
               )}
@@ -76,7 +76,7 @@ export const ProductCardUI = ({ product }: ProductCardUIProps) => {
               <div className="mb-3 space-y-2">
                 {logic.options.map((opt) => (
                   <div key={opt.id}>
-                    <div className="text-xs font-medium text-black mb-1">{opt.name}</div>
+                    <div className="text-xs font-semibold text-foreground mb-1">{opt.name}</div>
                     <div className="flex flex-wrap gap-2">
                       {opt.values.filter(val => logic.isOptionValueAvailable(opt.name, val)).map((val) => {
                         const isSelected = logic.selected[opt.name] === val
@@ -129,26 +129,25 @@ export const ProductCardUI = ({ product }: ProductCardUIProps) => {
 
             <div className="flex items-center justify-between">
               <div className="flex flex-col">
-                <span className="text-black font-semibold">
+                <span className="text-foreground font-bold text-lg">
                   {logic.formatMoney(logic.currentPrice)}
                 </span>
                 {logic.currentCompareAt && logic.currentCompareAt > logic.currentPrice && (
-                  <span className="text-gray-400 text-xs line-through">
+                  <span className="text-muted-foreground text-sm line-through">
                     {logic.formatMoney(logic.currentCompareAt)}
                   </span>
                 )}
               </div>
               <Button
-                variant="outline"
                 size="sm"
                 onClick={() => {
                   logic.onAddToCartSuccess() // Hook para features adicionales
                   logic.handleAddToCart()
                 }}
                 disabled={!logic.canAddToCart}
-                className="text-black border-black hover:bg-black hover:text-white disabled:opacity-50"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
               >
-                {logic.inStock ? 'Add' : 'Out of stock'}
+                {logic.inStock ? 'Agregar' : 'Sin stock'}
               </Button>
             </div>
           </CardContent>
